@@ -1,6 +1,6 @@
 import React from 'react';
 import { ParallaxBanner } from 'react-scroll-parallax';
-import RocketAnimation from './RocketAnimation';
+// import RocketAnimation from './RocketAnimation';
 
 import landingImg from '../../assets/images/landing.png'
 import bg from '../../assets/images/bg.png'
@@ -29,7 +29,7 @@ export const AdvancedBannerTop = () => {
 
   const foreground = {
     image: landingImg,
-    translateY: [10, 5],
+    translateY: [8, 0],
     scale: [0.5,1.2, 'easeOutCubic'],
     shouldAlwaysCompleteAnimation: true,
   };

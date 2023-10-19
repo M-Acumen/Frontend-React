@@ -3,11 +3,12 @@ import { AdvancedBannerTop } from "./AdvancedBanner";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import RocketAnimation from "./RocketAnimation";
+import { Link } from "react-router-dom";
 
 import { Row, Col, Container, Button } from "reactstrap";
 
-import landingContent from "./content.js";
-import LandingCard from "./LandingCard";
+// import landingContent from "./content.js";
+// import LandingCard from "./LandingCard";
 import "./Home.css";
 
 export default function ParallaxHome() {
@@ -95,7 +96,7 @@ export default function ParallaxHome() {
           </Row>
           <div className="btn-landing">
           <Button color="secondary" outline style={{fontSize: "3rem", color: "white"}}>
-          Let's Start
+          <Link to='/home'> Let's Start</Link> 
         </Button>
           </div>
 
