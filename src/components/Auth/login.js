@@ -1,4 +1,6 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import {useAuthState} from "react-firebase-hooks/auth";
 import {
   MDBBtn,
   MDBContainer,
@@ -10,12 +12,21 @@ import {
   MDBCheckbox,
   MDBIcon,
 } from "mdb-react-ui-kit";
-import { registerWithEmailAndPassword } from "../../firebase";
+import { auth, logInWithEmailAndPassword, registerWithEmailAndPassword } from "../../firebase";
 
-const Register = () => {
-  const [name, setName] = useState(null);
+const Login = () => {
+  
   const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(null);
+  const [user, loading, error] = useAuthState(auth)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (user) {
+        navigate("/landing")
+    }
+  }, [user, navigate])
+
   return (
     <MDBContainer
       fluid
@@ -56,26 +67,7 @@ const Register = () => {
 
           <MDBCard className="my-5 bg-glass">
             <MDBCardBody className="p-5">
-              <MDBRow>
-                <MDBCol col="6">
-                  <MDBInput
-                    wrapperClass="mb-4"
-                    label="First name"
-                    id="form1"
-                    type="text"
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </MDBCol>
-
-                <MDBCol col="6">
-                  <MDBInput
-                    wrapperClass="mb-4"
-                    label="Last name"
-                    id="form2"
-                    type="text"
-                  />
-                </MDBCol>
-              </MDBRow>
+              
 
               <MDBInput
                 wrapperClass="mb-4"
@@ -104,13 +96,19 @@ const Register = () => {
               <MDBBtn
                 className="w-100 mb-4"
                 size="md"
-                onClick={() => registerWithEmailAndPassword(name ,email, password)}
+                onClick={() => {
+                    logInWithEmailAndPassword(email, password)
+                    
+                        if (user) {
+                            navigate("/landing")
+                        }
+                }}
               >
-                sign up
+                Log In
               </MDBBtn>
 
               <div className="text-center">
-                <p>or sign up with:</p>
+                <p>or LogIn with:</p>
 
                 <MDBBtn
                   tag="a"
@@ -156,4 +154,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
