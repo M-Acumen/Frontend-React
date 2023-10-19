@@ -99,12 +99,19 @@ export default function ParallaxHome() {
           </Row>
           <div className="btn-landing">
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Button color="secondary" outline style={{fontSize: "3rem", color: "white"}}>
           <Link to='/home'> Let's Start</Link> 
 =======
           <Button color="secondary" outline style={{fontSize: "3rem", color: "white"}} onClick={()=>navigate("/login")}>
           Let's Start
 >>>>>>> ankit
+=======
+
+          <Button color="secondary" outline style={{fontSize: "3rem", color: "white"}} onClick={()=>navigate("/login")}>
+          Let's Start
+
+>>>>>>> 0ad88eff108aa237b98b724b5064d204a313e46c
         </Button>
           </div>
 
