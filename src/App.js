@@ -1,3 +1,4 @@
+
 import "./App.css";
 import Login from "./components/Auth/login";
 import Register from "./components/Auth/register";
@@ -12,6 +13,8 @@ function App() {
         <Route path="/landing" element={<Landing/>} />
         <Route path="/register" element={<Register />} />
       </Routes>
+
+
     </div>
   );
 }

@@ -3,11 +3,12 @@ import { AdvancedBannerTop } from "./AdvancedBanner";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import RocketAnimation from "./RocketAnimation";
+import { Link } from "react-router-dom";
 
 import { Row, Col, Container, Button } from "reactstrap";
 
-import landingContent from "./content.js";
-import LandingCard from "./LandingCard";
+// import landingContent from "./content.js";
+// import LandingCard from "./LandingCard";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 
@@ -97,8 +98,10 @@ export default function ParallaxHome() {
             ))}
           </Row>
           <div className="btn-landing">
+
           <Button color="secondary" outline style={{fontSize: "3rem", color: "white"}} onClick={()=>navigate("/login")}>
           Let's Start
+
         </Button>
           </div>
 
