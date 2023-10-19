@@ -1,12 +1,14 @@
 import React from 'react';
 import { ParallaxBanner } from 'react-scroll-parallax';
+import RocketAnimation from './RocketAnimation';
 
 import landingImg from '../../assets/images/landing.png'
+import bg from '../../assets/images/bg.png'
 
 export const AdvancedBannerTop = () => {
   const background = {
     image:
-      'https://s3-us-west-2.amazonaws.com/s.cdpn.io/105988/banner-background.jpg',
+      bg,
     translateY: [0, 50],
     opacity: [1, 0.3],
     scale: [1.05, 1, 'easeOutCubic'],
@@ -14,8 +16,8 @@ export const AdvancedBannerTop = () => {
   };
 
   const headline = {
-    translateY: [0, 30],
-    scale: [1, 1.05, 'easeOutCubic'],
+    translateY: [-20, 50],
+    scale: [1, 1.25, 'easeOutCubic'],
     shouldAlwaysCompleteAnimation: true,
     expanded: false,
     children: (
@@ -26,10 +28,9 @@ export const AdvancedBannerTop = () => {
   };
 
   const foreground = {
-    image:
-      landingImg,
-    translateY: [10, 15],
-    scale: [0.2, 0.9, 'easeOutCubic'],
+    image: landingImg,
+    translateY: [10, 5],
+    scale: [0.5,1.2, 'easeOutCubic'],
     shouldAlwaysCompleteAnimation: true,
   };
 

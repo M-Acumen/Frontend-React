@@ -2,6 +2,7 @@ import { ParallaxProvider } from "react-scroll-parallax";
 import { AdvancedBannerTop } from "./AdvancedBanner";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
+import RocketAnimation from "./RocketAnimation";
 
 import { Row, Col, Container, Button } from "reactstrap";
 
@@ -97,10 +98,10 @@ export default function ParallaxHome() {
           Let's Start
         </Button>
           </div>
-         
+
         </Container>
 
-        
+        <RocketAnimation />
       </div>
       </>
     

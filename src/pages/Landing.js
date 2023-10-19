@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 
-import MainHome from "../components/Home/MainHome";
+import MainHome from "../components/Landing/MainHome";
 import PsButtons from "../components/UI/PsButtons";
 
 const Home = () => {
@@ -12,7 +12,7 @@ const Home = () => {
     // Set showBComponent to true after 3 seconds
     const timer = setTimeout(() => {
       setShowBComponent(true);
-    }, 1);
+    }, 3000);
 
     // Clear the timer if the component unmounts or if the state changes before 3 seconds
     return () => clearTimeout(timer);

@@ -1,10 +1,14 @@
 import './App.css';
-import Home from './pages/Home'
+import Landing from './pages/Landing'
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-        <Home />
+      <Routes>
+      <Route path='/' element={<Landing />} />
+        
+      </Routes>
     </div>
   );
 }
