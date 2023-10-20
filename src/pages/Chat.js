@@ -1,39 +1,53 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
-const ChatApp = () => {
+function TextInput() {
   const [inputText, setInputText] = useState('');
-  const [response, setResponse] = useState('');
+  const [responseMessage, setResponseMessage] = useState('');
 
-  const handleInputChange = (event) => {
-    setInputText(event.target.value);
+  const handleInputChange = (e) => {
+    setInputText(e.target.value);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await axios.post('http://127.0.0.1:8000/', {
-        // prompt: inputText
+  const handleSubmit = () => {
+    // Create a JSON object with the user's input
+    const data = { text: inputText };
+
+    // Make a POST request to the API endpoint
+    fetch('http://localhost:8000/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Set the API response message to the state
+        setResponseMessage(data.data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
       });
-      setResponse(response.data);
-      console.log(response.data); // assuming the response format is { message: 'response text' }
-    } catch (error) {
-      console.error('Error fetching data: ', error);
-    }
   };
 
   return (
-    <div className="chat-container">
-      <form onSubmit={handleSubmit}>
-        <label>
-          Enter your message:
-          <input type="text" value={inputText} onChange={handleInputChange} />
-        </label>
-        <button type="submit">Send</button>
-      </form>
-      {response && <div className="response-container">{response}</div>}
+    <div>
+      <input
+        type="text"
+        value={inputText}
+        onChange={handleInputChange}
+        placeholder="Enter your text"
+      />
+      <button onClick={handleSubmit}>Post to API</button>
+      <p>You entered: {inputText}</p>
+      <p>API Response: {responseMessage}</p>
     </div>
   );
-};
+}
 
-export default ChatApp;
+export default TextInput;
