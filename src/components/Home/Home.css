@@ -1,5 +1,5 @@
 .bg-home{
-    /* background-color: #000814; */
+    background-color: #ffff;
     background-image: url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
     /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 
@@ -141,4 +141,13 @@ background-image: url("https://www.transparenttextures.com/patterns/inspiration-
 .img-clock:hover{
     transform: scale(1.2);
     transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+.leaderBoard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: white;
 }

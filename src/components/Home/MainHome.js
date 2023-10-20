@@ -12,17 +12,21 @@ import TodoList from "./TodoList";
 import Card from "./Card";
 
 const MainHome = () => {
+
+  const leaderBoard = [{id: 1, name: 'Harry', coins: 980},
+  {id: 2, name: 'Ankit', coins: 755},
+  {id: 3, name: 'Aditi', coins: 125},
+];
+
   const days = [
-    { id: 1, day: "S" },
-    { id: 2, day: "M" },
-    { id: 3, day: "T" },
-    { id: 4, day: "W" },
-    { id: 5, day: "T" },
-    { id: 6, day: "F" },
+    { id: 1, day: "M" },
+    { id: 2, day: "T" },
+    { id: 3, day: "W" },
+    { id: 4, day: "T" },
+    { id: 5, day: "F" },
+    { id: 6, day: "S" },
     { id: 7, day: "S" },
   ];
-
-
 
   const currentDate = new Date();
   const currentDayOfWeek = currentDate.getDay();
@@ -74,54 +78,14 @@ const MainHome = () => {
             lg="6"
             style={{ backgroundColor: "#003566" }}
           >
-            <div className="progress-card">
-              <Row>
-                <Col className="my-flex-props" lg="4">
-                  <img className="app-icon" src={bot} alt="" />
-                </Col>
-                <Col lg="8">
-                  <h4> Interactive Chatbot</h4>
-                  <p>Talk to our virutal chatbot to solve your queries</p>
-                  <Button color="primary" outline>
-                  <Link to='/chatme'> Visit App</Link>  
-                  </Button>
-                </Col>
-              </Row>
-
-              <Row className="mt-5">
-                <Col className="my-flex-props" lg="4">
-                  <img className="app-icon" src={cube} alt="" />
-                </Col>
-                <Col lg="8">
-                  <h4> Memory Game</h4>
-                  <p>Test and enhance your memory.</p>
-                  <Button color="primary" outline>
-                  <Link to='https://aditipy.github.io/Simon.github.io/'> Visit App</Link>  
-                  </Button>
-                </Col>
-                
-              </Row>
-                  <hr />
-                  <div style={{textAlign: "center"}}>
-                  <h4 style={{color: "gray"}}>Special Care Section</h4>
-                  </div>
-              <Row className="">
-                <Col className="my-flex-props" lg="4">
-                  <img className="app-icon" src={blue} alt="" />
-                </Col>
-                <Col lg="8">
-                  <h4> Write an essay.</h4>
-                  <p>Get rewarded on your essay writing skills</p>
-                  <Button color="primary" outline>
-                  <Link to='/grammar'> Visit App</Link>  
-                  </Button>
-                </Col>
-                
-              </Row>
-             
-
-
+          {leaderBoard.map((leader)=>{
+            return <div className="leaderBoard" key={leader.id}>
+                  <p>{leader.id}</p>
+                  <h5>{leader.name}</h5>
+                  <p>{leader.coins}</p>
             </div>
+      
+          })}
 
 
           </Col>
