@@ -3,7 +3,7 @@ import MainPomodoro from '../components/Pomodoro/MainPomodoro'
 
 const PomoDoro = () => {
   return (
-    <div style={{minHeight :"100vh", backgroundColor: "white"}}>
+    <div>
     <MainPomodoro />
     </div>
   )

@@ -17,7 +17,7 @@ import idleImg from "../../assets/images/idle.png";
 
 import "./chat.css";
 import MicAnimation from "./MicAnimation";
-import EggsAnimation from './EggsAnimation';
+import CatEar from './CatEar';
 
 function SpeechInput() {
   const [currState, setCurrState] = useState("idle");
@@ -89,7 +89,7 @@ function SpeechInput() {
             </MDBDropdown>
 
             {currState === "idle" && <MicAnimation /> }
-            {currState === "loading" && <EggsAnimation /> }
+            {currState === "loading" && <CatEar /> }
             {currState === "speaking" &&  <p className="resp-p"> {responseMessage}</p>}
               
   
