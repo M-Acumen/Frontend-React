@@ -21,11 +21,11 @@ const Login = () => {
   const [user, loading, error] = useAuthState(auth)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (user) {
-        navigate("/home")
-    }
-  }, [user, navigate])
+  // useEffect(() => {
+  //   if (user) {
+  //       navigate("/home")
+  //   }
+  // }, [user, navigate])
 
   return (
     <MDBContainer

@@ -5,6 +5,7 @@ import "./Home.css"; // Make sure to import your CSS file
 import suberBoy from "../../assets/images/superboy.png";
 import cube from "../../assets/images/cube.png";
 import bot from "../../assets/images/bot.png";
+import blue from '../../assets/images/blue.png'
 
 import TodoList from "./TodoList";
 import Card from "./Card";
@@ -91,20 +92,43 @@ const MainHome = () => {
                   <img className="app-icon" src={cube} alt="" />
                 </Col>
                 <Col lg="8">
-                  <h4> Interactive Chatbot</h4>
-                  <p>Talk to our virutal chatbot to solve your queries</p>
+                  <h4> Memory Game</h4>
+                  <p>Test and enhance your memory.</p>
                   <Button color="primary" outline>
                   <Link to='https://aditipy.github.io/Simon.github.io/'> Visit App</Link>  
                   </Button>
                 </Col>
+                
               </Row>
+                  <hr />
+                  <div style={{textAlign: "center"}}>
+                  <h4 style={{color: "gray"}}>Special Care Section</h4>
+                  </div>
+              <Row className="">
+                <Col className="my-flex-props" lg="4">
+                  <img className="app-icon" src={blue} alt="" />
+                </Col>
+                <Col lg="8">
+                  <h4> Write an essay.</h4>
+                  <p>Get rewarded on your essay writing skills</p>
+                  <Button color="primary" outline>
+                  <Link to='/grammar'> Visit App</Link>  
+                  </Button>
+                </Col>
+                
+              </Row>
+             
+
+
             </div>
+
+
           </Col>
 
           <Col
             className="my-flex-props round-right"
             lg="6"
-            style={{ backgroundColor: "#001d3d" }}
+            style={{ backgroundColor: "#001d3d"}}
           >
             <TodoList />
           </Col>

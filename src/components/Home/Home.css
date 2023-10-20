@@ -54,6 +54,17 @@ background-image: url("https://www.transparenttextures.com/patterns/inspiration-
     min-width: 150px;
   }
 
+.card-dash:hover{
+    transform: scale(1.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dash-info:hover{
+    transform: scale(1.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
 .dash-item{
     display: flex;
     justify-content: center;
@@ -64,6 +75,11 @@ background-image: url("https://www.transparenttextures.com/patterns/inspiration-
     height: 250px;
     position: absolute;
     border-radius: 50%;
+}
+
+.img-dash:hover{
+    transform: scale(1.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .dash-info h4{
