@@ -100,7 +100,7 @@ export default function ParallaxHome() {
           <div className="btn-landing">
 
 
-          <Button color="secondary" outline style={{fontSize: "3rem", color: "white"}} onClick={()=>navigate("/login")}>
+          <Button color="secondary" outline style={{fontSize: "3rem", color: "white"}} onClick={()=>navigate("/register")}>
           Let's Start
 
 

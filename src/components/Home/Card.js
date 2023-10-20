@@ -1,11 +1,11 @@
 import React from 'react'
 import './Home.css'
-const Card = () => {
+const Card = (props) => {
   return (
     <div className='card-dash'>
-        <h1>icon</h1>
-        <p>250</p>
-        <p>stars</p>
+        <h1>{props.title}</h1>
+        <p>{props.value}</p>
+        <i className={props.icon}></i>
     </div>
   )
 }

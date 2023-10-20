@@ -11,11 +11,13 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import { registerWithEmailAndPassword } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
   return (
     <MDBContainer
       fluid
@@ -110,7 +112,15 @@ const Register = () => {
               </MDBBtn>
 
               <div className="text-center">
-                <p>or sign up with:</p>
+                <p>or Login if already registered</p>
+
+                <MDBBtn
+                className="w-100 mb-4"
+                size="md"
+                onClick={() => navigate("/login")}
+              >
+                Login
+              </MDBBtn>
 
                 <MDBBtn
                   tag="a"

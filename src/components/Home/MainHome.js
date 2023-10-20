@@ -5,6 +5,7 @@ import "./Home.css"; // Make sure to import your CSS file
 import TodoList from "./TodoList";
 import Card from "./Card";
 import Progress from "./Progress";
+import 'font-awesome/css/font-awesome.min.css'
 
 const MainHome = () => {
   const days = [
@@ -34,9 +35,9 @@ const MainHome = () => {
         <Row>
           <Col lg="5">
             <div className="flex-cards">
-              <Card />
-              <Card />
-              <Card />
+              <Card title="Level" value="10" icon=""/>
+              <Card title="INC" value="25000"/>
+              <Card title="Streak" value="7"/>
             </div>
           </Col>
           <Col lg="3" className="dash-item">
