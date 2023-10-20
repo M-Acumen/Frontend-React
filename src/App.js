@@ -4,12 +4,12 @@
 import "./App.css";
 import Login from "./components/Auth/login";
 import Register from "./components/Auth/register";
+import Home from "./components/Home/MainHome";
 import Landing from "./pages/Landing";
 import Chat from './pages/Chat';
 import Grammar from "./pages/Grammar";
 
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
 
 function App() {
   return (
