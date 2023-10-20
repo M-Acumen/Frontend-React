@@ -10,8 +10,11 @@ import { Row, Col, Container, Button } from "reactstrap";
 // import landingContent from "./content.js";
 // import LandingCard from "./LandingCard";
 import "./Home.css";
+import { useNavigate } from "react-router-dom";
 
 export default function ParallaxHome() {
+
+  const navigate = useNavigate()
   const serviceData = [
     {
       icon: "ri-truck-line",
@@ -95,8 +98,12 @@ export default function ParallaxHome() {
             ))}
           </Row>
           <div className="btn-landing">
-          <Button color="secondary" outline style={{fontSize: "3rem", color: "white"}}>
-          <Link to='/home'> Let's Start</Link> 
+
+
+          <Button color="secondary" outline style={{fontSize: "3rem", color: "white"}} onClick={()=>navigate("/login")}>
+          Let's Start
+
+
         </Button>
           </div>
 
