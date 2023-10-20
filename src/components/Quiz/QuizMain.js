@@ -16,7 +16,7 @@ const QuizMain = () => {
 
   return (
     <div>
-      
+      quiz main
 
     </div>
   )
