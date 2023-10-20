@@ -6,6 +6,7 @@ import suberBoy from "../../assets/images/superboy.png";
 import cube from "../../assets/images/cube.png";
 import bot from "../../assets/images/bot.png";
 import blue from '../../assets/images/blue.png'
+import clock from '../../assets/images/clock.png'
 
 import TodoList from "./TodoList";
 import Card from "./Card";
@@ -21,17 +22,17 @@ const MainHome = () => {
     { id: 7, day: "S" },
   ];
 
-  const progressData = [
-    { id: 1, h3: "Linear equation using 2 variables", val: 0.2 },
-    { id: 2, h3: "Forces & Newtons Laws of Motion", val: 0.7 },
-    { id: 3, h3: "Matter - Solids, Liquids & Gases", val: 0.4 },
-  ];
+
 
   const currentDate = new Date();
   const currentDayOfWeek = currentDate.getDay();
   return (
     <div className="bg-home">
-      <div className="dummy-dash"></div>
+      <div className="dummy-dash">
+      <div style={{display: "flex", flexDirection: "row-reverse"}}>
+      <Link to='/pomodoro'> <img className="img-clock" style={{margin: "45px 120px 0 0"}} src={clock} alt=".." /> </Link>
+      </div>
+      </div>
 
       <Container className="dash">
         <Row>

@@ -137,3 +137,8 @@ background-image: url("https://www.transparenttextures.com/patterns/inspiration-
 .mt-5{
     margin-top: 10px;
 }
+
+.img-clock:hover{
+    transform: scale(1.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}

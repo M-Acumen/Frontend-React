@@ -4,6 +4,12 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import axios from "axios";
 import { Row, Col, Container } from "reactstrap";
+import {
+  MDBDropdown,
+  MDBDropdownMenu,
+  MDBDropdownToggle,
+  MDBDropdownItem,
+} from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 
 import listeningImg from "../../assets/images/listen.png";
@@ -11,17 +17,20 @@ import idleImg from "../../assets/images/idle.png";
 
 import "./chat.css";
 import MicAnimation from "./MicAnimation";
+import EggsAnimation from './EggsAnimation';
 
 function SpeechInput() {
   const [currState, setCurrState] = useState("idle");
+  const [currLang, setCurrLang] = useState('english')
 
   const [responseMessage, setResponseMessage] = useState("");
   const { transcript, resetTranscript } = useSpeechRecognition();
 
   const handleSubmit = () => {
+    setCurrState("loading")
     // Send the recorded audio to the API
     axios
-      .post("http://localhost:8000/aitutor", { text: transcript })
+      .post("http://localhost:8000/aitutor/"+currLang, { text: transcript })
       .then((response) => {
         resetTranscript();
         // console.log(response);
@@ -39,12 +48,15 @@ function SpeechInput() {
   };
 
   return (
-    <div className="my-flex-props white-body bg-chat" style={{ padding: "100px 0" }}>
+    <div
+      className="my-flex-props white-body bg-chat"
+      style={{ padding: "100px 0" }}
+    >
       <Container>
         <Row>
           <Col lg="6">
             {currState === "idle" && <img src={listeningImg} alt=".." />}
-
+            {currState === "loading" && <img src={listeningImg} alt=".." />}
             {currState === "speaking" && <img src={idleImg} alt=".." />}
           </Col>
 
@@ -65,11 +77,22 @@ function SpeechInput() {
               Confirm
             </button>
 
-            {currState === "idle" ? (
-              <MicAnimation />
-            ) : (
-              <p className="resp-p"> {responseMessage}</p>
-            )}
+            <MDBDropdown>
+              <MDBDropdownToggle tag="a" className="btn btn-primary" onClick={()=> setCurrLang('english')}>
+               {currLang}
+              </MDBDropdownToggle>
+              <MDBDropdownMenu>
+                <MDBDropdownItem link onClick={()=> setCurrLang('hindi')}>Hindi</MDBDropdownItem>
+                <MDBDropdownItem link onClick={()=> setCurrLang('french')}>French</MDBDropdownItem>
+                <MDBDropdownItem link onClick={()=> setCurrLang('japanese')}>japanese</MDBDropdownItem>
+              </MDBDropdownMenu>
+            </MDBDropdown>
+
+            {currState === "idle" && <MicAnimation /> }
+            {currState === "loading" && <EggsAnimation /> }
+            {currState === "speaking" &&  <p className="resp-p"> {responseMessage}</p>}
+              
+  
 
             <button className="btn-back">
               {" "}

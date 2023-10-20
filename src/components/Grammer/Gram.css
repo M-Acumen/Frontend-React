@@ -4,6 +4,9 @@
     align-items: center;
     justify-content: center;
     /* background-color: white; */
+    background-color: #ffffff;
+background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 .word{
     margin: 0 25px;
@@ -15,4 +18,11 @@
 
 .flex-col{
     flex-direction: column;
+}
+
+.resp-text{
+    padding: 10px 20px;
+    border-radius: 40px;
+    
+
 }

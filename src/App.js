@@ -10,6 +10,7 @@ import Chat from './pages/Chat';
 import Grammar from "./pages/Grammar";
 
 import { Routes, Route } from "react-router-dom";
+import PomoDoro from "./pages/PomoDoro";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/chatme" element={<Chat />} />
         <Route path="/grammar" element={<Grammar />} />
+        <Route path="/pomodoro" element={<PomoDoro />} />
+
 
 
       </Routes>
