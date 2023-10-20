@@ -3,7 +3,7 @@ import MainHome from '../components/Home/MainHome'
 
 const Home = () => {
   return (
-     <div>
+     <div className='bg-home'>
        <MainHome />
      </div>
   )

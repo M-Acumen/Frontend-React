@@ -1,9 +1,25 @@
+.bg-home{
+    /* background-color: #000814; */
+    background-image: url("https://www.transparenttextures.com/patterns/diamond-upholstery.png");
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+
+}
+
 .dummy-dash{
     min-height: 200px;
-    background-color: #a32100;
+    background-color: #001d3d;
 background-image: url("https://www.transparenttextures.com/patterns/inspiration-geometry.png");
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
+
+.right-dash-item{
+    background-color: orange;
+    color: white;
+    padding: 20px 50px;
+    border-radius: 50px;
+    font-weight: 400;
+}
+
 
 
 
@@ -14,12 +30,18 @@ background-image: url("https://www.transparenttextures.com/patterns/inspiration-
     /* background-color: black; */
     border-radius: 50px;
     padding: 20px 100px;
+    font-size: 1.2rem;
+
+}
+.dash p{
+    font-size: 1.5rem;
 }
 
 .flex-cards{
     display: flex;
     /* justify-content: space-between; */
     justify-content: center;
+    align-items: center;
 }
 
 .card-dash{
@@ -28,7 +50,8 @@ background-image: url("https://www.transparenttextures.com/patterns/inspiration-
     /* border: 2px solid;  */
     /* border-style: solid; */
     border-radius: 20px;
-    background-color: #a6e2e6;
+    /* background-color: #a6e2e6; */
+    min-width: 150px;
   }
 
 .dash-item{
@@ -38,7 +61,8 @@ background-image: url("https://www.transparenttextures.com/patterns/inspiration-
 }
 
 .img-dash{
-    height: 100px;
+    height: 250px;
+    position: absolute;
     border-radius: 50%;
 }
 
@@ -88,4 +112,12 @@ background-image: url("https://www.transparenttextures.com/patterns/inspiration-
     border-radius: 40px;
     background-color: aliceblue;
     padding: 20px 40px;
+}
+
+.app-icon{
+    height: 100px;
+}
+
+.mt-5{
+    margin-top: 10px;
 }

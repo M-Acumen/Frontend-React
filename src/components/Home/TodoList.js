@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MDBBadge,
   MDBCard,
@@ -6,157 +6,87 @@ import {
   MDBCheckbox,
   MDBCol,
   MDBContainer,
+  MDBInputGroup,
   MDBListGroup,
   MDBListGroupItem,
   MDBRow,
 } from "mdb-react-ui-kit";
 
 export default function TodoList() {
+  const [todoItems, setTodoItems] = useState([
+    { id: 1, todo: "Team meeting", completed: false },
+    { id: 2, todo: "Task list and assignments", completed: false },
+    { id: 3, todo: "Get Groceries", completed: false },
+    { id: 4, todo: "Study 5th chapter of Physics", completed: false },
+    { id: 5, todo: "Submit the project for Chemistry", completed: false },
+  ]);
 
-    const todoItems = [
-        {id: 1, todo: 'Team meeting'},
-        {id: 2, todo: 'Task list and assignments'},
-        {id: 3, todo: 'Get Groceries'},
-        {id: 4, todo: 'Study 5th chapter of Physics'},
-        {id: 5, todo: 'Submit the project for Chemistry'},
-    ]
+  const [newTodo, setNewTodo] = useState("");
+
+  const addTodo = () => {
+    if (newTodo.trim() !== "") {
+      const newId = todoItems.length + 1;
+      const newItem = { id: newId, todo: newTodo, completed: false };
+      setTodoItems([...todoItems, newItem]);
+      setNewTodo("");
+    }
+  };
+
+  const toggleTodoCompletion = (id) => {
+    const updatedTodos = todoItems.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodoItems(updatedTodos);
+  };
+
   return (
     <section className="p-5">
       <MDBContainer className="py-5 h-100">
         <MDBRow className="d-flex justify-content-center align-items-center">
           <MDBCol>
-         
-          <MDBCard className="rounded-3">
+            <MDBCard className="rounded-3">
               <MDBCardBody className="p-4">
                 <h5>
-                  <span className="h2 me-2">Team Meeting</span>{" "}
+                  <span className="h2 me-2">ToDo</span>{" "}
                   <MDBBadge className="mx-2" color="danger">
                     checklist
                   </MDBBadge>
                 </h5>
                 <p className="text-muted pb-2">04/01/2020 • ML - 1321</p>
-            
-            <MDBListGroup className="rounded-0">
-          {todoItems.map((todo)=>(
-            <MDBListGroupItem className="border-0 d-flex align-items-center ps-0">
-                    <MDBCheckbox
-                      name="flexCheck"
-                      value=""
-                      id="flexCheckChecked"
-                      className="me-3"
-                      defaultChecked
-                    />
-                    <s>{todo.todo}</s>
-                  </MDBListGroupItem>
-          ))}
-          </MDBListGroup>
-          </MDBCardBody>
-            </MDBCard>
 
-            {/* <MDBCard className="rounded-3">
-              <MDBCardBody className="p-4">
-                <h5>
-                  <span className="h2 me-2">Team Meeting</span>{" "}
-                  <MDBBadge className="mx-2" color="danger">
-                    checklist
-                  </MDBBadge>
-                </h5>
-                <p className="text-muted pb-2">04/01/2020 • ML - 1321</p>
+                <MDBInputGroup>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Add a new item"
+                    value={newTodo}
+                    onChange={(e) => setNewTodo(e.target.value)}
+                  />
+                  <button className="btn btn-primary" onClick={addTodo}>
+                    Add
+                  </button>
+                </MDBInputGroup>
+
                 <MDBListGroup className="rounded-0">
-                  <MDBListGroupItem className="border-0 d-flex align-items-center ps-0">
-                    <MDBCheckbox
-                      name="flexCheck"
-                      value=""
-                      id="flexCheckChecked"
-                      className="me-3"
-                      defaultChecked
-                    />
-                    <s>Task list and assignments</s>
-                  </MDBListGroupItem>
-                  <MDBListGroupItem className="border-0 d-flex align-items-center ps-0">
-                    <MDBCheckbox
-                      name="flexCheck"
-                      value=""
-                      id="flexCheck"
-                      className="me-3"
-                    />
-                    Set due date and assignments
-                  </MDBListGroupItem>
-                  <MDBListGroupItem className="border-0 d-flex align-items-center ps-0">
-                    <MDBCheckbox
-                      name="flexCheck"
-                      value=""
-                      id="flexCheck"
-                      className="me-3"
-                    />
-                    Remove duplicate tasks and stories
-                  </MDBListGroupItem>
-                  <MDBListGroupItem className="border-0 d-flex align-items-center ps-0">
-                    <MDBCheckbox
-                      name="flexCheck"
-                      value=""
-                      id="flexCheck"
-                      className="me-3"
-                    />
-                    Update the userflow and stories
-                  </MDBListGroupItem>
-                  <MDBListGroupItem className="border-0 d-flex align-items-center ps-0">
-                    <MDBCheckbox
-                      name="flexCheck"
-                      value=""
-                      id="flexCheck"
-                      className="me-3"
-                    />
-                    Adjust the components
-                  </MDBListGroupItem>
-                </MDBListGroup>
-                <div className="divider d-flex align-items-center my-4">
-                  <p
-                    className="text-center mx-3 mb-0"
-                    style={{ color: "#a2aab7" }}
-                  >
-                    Shared with
-                  </p>
-                </div>
-                <MDBListGroup
-                  horizontal
-                  className="rounded-0 justify-content-center pb-2"
-                >
-                  <MDBListGroupItem className="border-0 d-flex align-items-center p-0">
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp"
-                      alt="avatar"
-                      className="rounded-circle me-n2"
-                      width="45"
-                    />
-                  </MDBListGroupItem>
-                  <MDBListGroupItem className="border-0 d-flex align-items-center p-0">
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-3.webp"
-                      alt="avatar"
-                      className="rounded-circle me-n2"
-                      width="45"
-                    />
-                  </MDBListGroupItem>
-                  <MDBListGroupItem className="border-0 d-flex align-items-center p-0">
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp"
-                      alt="avatar"
-                      className="rounded-circle me-n2"
-                      width="45"
-                    />
-                  </MDBListGroupItem>
-                  <MDBListGroupItem className="border-0 d-flex align-items-center p-0">
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-                      alt="avatar"
-                      className="rounded-circle me-n2"
-                      width="45"
-                    />
-                  </MDBListGroupItem>
+                  {todoItems.map((todo) => (
+                    <MDBListGroupItem
+                      className="border-0 d-flex align-items-center ps-0"
+                      key={todo.id}
+                    >
+                      <MDBCheckbox
+                        name="flexCheck"
+                        value=""
+                        id={`flexCheckChecked-${todo.id}`}
+                        className="me-3"
+                        checked={todo.completed}
+                        onChange={() => toggleTodoCompletion(todo.id)}
+                      />
+                      {todo.completed ? <s>{todo.todo}</s> : todo.todo}
+                    </MDBListGroupItem>
+                  ))}
                 </MDBListGroup>
               </MDBCardBody>
-            </MDBCard> */}
+            </MDBCard>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
