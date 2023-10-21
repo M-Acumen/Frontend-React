@@ -13,6 +13,7 @@ import Card from "./Card";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import { UserContext } from "../../UserContext";
+import { auth } from "../../firebase";
 
 const MainHome = () => {
 
