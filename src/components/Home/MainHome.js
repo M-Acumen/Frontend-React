@@ -5,21 +5,23 @@ import "./Home.css"; // Make sure to import your CSS file
 import suberBoy from "../../assets/images/superboy.png";
 import cube from "../../assets/images/cube.png";
 import bot from "../../assets/images/bot.png";
-import blue from '../../assets/images/blue.png'
-import clock from '../../assets/images/clock.png'
+import blue from "../../assets/images/blue.png";
+import clock from "../../assets/images/clock.png";
 
 import TodoList from "./TodoList";
 import Card from "./Card";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import { UserContext } from "../../UserContext";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 const MainHome = () => {
 
-  const leaderBoard = [{id: 1, name: 'Harry', coins: 980},
-  {id: 2, name: 'Ankit', coins: 755},
-  {id: 3, name: 'Aditi', coins: 125},
+  const leaderBoard = [
+  //   {id: 1, name: 'Harry', coins: 980},
+  // {id: 2, name: 'Ankit', coins: 755},
+  // {id: 3, name: 'Aditi', coins: 125},
 ];
 
   const days = [
@@ -37,8 +39,8 @@ const MainHome = () => {
   // const [currentUser, setCurrentUser] = useState();
   // const [userData, setUserData] = useState();
   const [user, loading, error] = useAuthState(auth);
-  const {currentUser, userData} = useContext(UserContext);
-  
+  const { currentUser, userData } = useContext(UserContext);
+
   // useEffect(() => {
   //   // auth.onAuthStateChanged((user) => {
   //   //   setCurrentUser(user)
@@ -65,12 +67,48 @@ const MainHome = () => {
   //   fetchUserData();
   // }, [currentUser]);
 
+  useEffect(() => {
+    const fetchAllUsers = async () => {
+      try {
+        const query = await getDocs(collection(db, "users"));
+        query.forEach((doc) =>
+          leaderBoard.push({
+            id: leaderBoard.length + 1,
+            name: doc.data().name,
+            points: doc.data().coins,
+          })
+        );
+
+        leaderBoard.sort((a, b) => b.points - a.points);
+
+        for (let i = 0; i < leaderBoard.length; i++) {
+          leaderBoard[i].id = i+1
+          
+        }
+
+        console.log(leaderBoard);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    fetchAllUsers();
+  }, [leaderBoard]);
+
   return (
     <div className="bg-home">
       <div className="dummy-dash">
-      <div style={{display: "flex", flexDirection: "row-reverse"}}>
-      <Link to='/pomodoro'> <img className="img-clock" style={{margin: "45px 120px 0 0"}} src={clock} alt=".." /> </Link>
-      </div>
+        <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+          <Link to="/pomodoro">
+            {" "}
+            <img
+              className="img-clock"
+              style={{ margin: "45px 120px 0 0" }}
+              src={clock}
+              alt=".."
+            />{" "}
+          </Link>
+        </div>
       </div>
 
       <Container className="dash">
@@ -113,22 +151,34 @@ const MainHome = () => {
             lg="6"
             style={{ backgroundColor: "#003566" }}
           >
-          {leaderBoard.map((leader)=>{
-            return <div className="leaderBoard" key={leader.id}>
-                  <p>{leader.id}</p>
-                  <h5>{leader.name}</h5>
-                  <p>{leader.coins}</p>
+            {/* {leaderBoard?.map((leader) => {
+              console.log(leader)
+              return (
+                
+                <div className="leaderBoard" key={leader?.id}>
+                  <p>{leader?.id}</p>
+                  <h5>{leader?.name}</h5>
+                  <p>{leader?.points}</p>
+                </div>
+              );
+            })} */}
+            <ul>
+        {leaderBoard.map((user) => (
+          <li key={user.id}>
+            <div className="user-card">
+              <p>Name: {user.name}</p>
+              <p>Points: {user.points}</p>
+              {/* Add more user details here */}
             </div>
-      
-          })}
-
-
+          </li>
+        ))}
+      </ul>
           </Col>
 
           <Col
             className="my-flex-props round-right"
             lg="6"
-            style={{ backgroundColor: "#001d3d"}}
+            style={{ backgroundColor: "#001d3d" }}
           >
             <TodoList />
           </Col>

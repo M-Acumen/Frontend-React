@@ -82,7 +82,13 @@ const registerWithEmailAndPassword = async (name, email, password, username) => 
       coins : 0,
       streak : 0, 
       username : name,
-      todo : {}
+      todo : [
+        {
+          id : 1,
+          todo : "Complete your first task",
+          completed: false
+        }
+      ]
     });
   } catch (err) {
     console.error(err);
