@@ -79,7 +79,7 @@ export default function ParallaxHome() {
         />
         <Container>
           <Row>
-            {serviceData.map((data, index) => (
+            {/* {serviceData.map((data, index) => (
               <Col lg="3" md="4" key={index}>
                 <motion.div
                   className="service__item"
@@ -95,21 +95,21 @@ export default function ParallaxHome() {
                   </div>
                 </motion.div>
               </Col>
-            ))}
+            ))} */}
           </Row>
           <div className="btn-landing">
 
 
-          <Button color="secondary" outline style={{fontSize: "3rem", color: "white"}} onClick={()=>navigate("/login")}>
+          <Button className="cust-btn-prlx" color="primary" outline style={{fontSize: "3rem", backgroundColor: "white", position: "relative", zIndex: "2"}} onClick={()=>navigate("/login")}>
           Let's Start
-
-
         </Button>
           </div>
 
         </Container>
 
+         <div style={{position: "relative", top: "-300px", zIndex: "0"}}>
         <RocketAnimation />
+         </div>   
       </div>
       </>
     

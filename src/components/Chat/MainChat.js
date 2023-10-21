@@ -65,7 +65,7 @@ function SpeechInput() {
               Welcome to the{" "}
               <span style={{ color: "blue" }}>Interactive Chatbot</span>.
             </h1>
-            <button onClick={startListening} className="btn-ask">
+            <button onClick={startListening} className="btn-ask" style={{color: "black"}}>
               Ask me a question
             </button>
             <p>Spoken Text: {transcript}</p>
@@ -73,7 +73,7 @@ function SpeechInput() {
             {/* <button onClick={SpeechRecognition.stopListening}>
             Stop Speech Input
           </button> */}
-            <button onClick={handleSubmit} className="btn-confirm">
+            <button onClick={handleSubmit} className="btn-confirm" style={{color: "black"}}>
               Confirm
             </button>
 

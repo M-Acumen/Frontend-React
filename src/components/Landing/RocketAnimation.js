@@ -1,27 +1,26 @@
-import React, { useEffect, useRef } from 'react';
-import lottie from 'lottie-web';
-import rocketAnimation from './rocket.json'; // Replace with the correct path to your rocket.json file
+import React from "react";
+import Lottie from "react-lottie";
+import animationData from "./rocket.json"; // Replace with the path to your JSON animation file
 
-const RocketAnimation = () => {
-  const animationContainer = useRef(null);
-
-  useEffect(() => {
-    // Load the animation
-    const anim = lottie.loadAnimation({
-      container: animationContainer.current,
-      renderer: 'svg', // Set the renderer to 'svg', 'canvas', 'html' based on your preference
-      loop: true, // Set to true if you want the animation to loop
-      autoplay: true, // Set to true if you want the animation to play automatically
-      animationData: rocketAnimation, // Your JSON animation data
-    });
-
-    // Clean up on unmount
-    return () => {
-      anim.destroy();
-    };
-  }, []);
-
-  return <div ref={animationContainer} />;
+const lottieOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animationData, // Your JSON animation data
 };
+function Rocket() {
+  return (
+    <div>
+      <Lottie
+        options={lottieOptions}
+        height={700} // Set the height as needed
+        width={700} // Set the width as needed
+      />
+    </div>
+  );
+}
 
-export default RocketAnimation;
+function App() {
+  return <Rocket />;
+}
+
+export default App;
