@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container } from "reactstrap";
 import { Link } from "react-router-dom";
 import acumenImg from "./acumen.png";
 
 import "./nav.css";
+import { UserContext } from "../../UserContext";
 
 const Navbar = () => {
+  const {currentUser, userData} = useContext(UserContext)
   return (
     <nav style={{ backgroundColor: "white", padding: "10px 0" }}>
       <Container
@@ -23,7 +25,7 @@ const Navbar = () => {
 
         <div className="nav-item underline" style={{ display: "flex", gap: "10px" }}>
           <div>
-            <span style={{ fontSize: "1rem" }}>2700</span>
+            <span style={{ fontSize: "1rem" }}>{userData?.coins}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="30"

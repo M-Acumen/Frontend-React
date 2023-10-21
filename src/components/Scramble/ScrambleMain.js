@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import posed from "react-pose";
 import "./UnscrambleGame.css";
 import { Button } from "reactstrap";
 import LoaderPink from './LoaderPink'
 import { Link } from "react-router-dom";
+import { UserContext } from "../../UserContext";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const Animation = posed.div({
   scramble: {
@@ -26,12 +29,14 @@ const UnscrambleGame = () => {
       .join("");
   };
 
-  const wordList = ["unscramble", "gorgeous", "maroon", "development", "local"];
+  const {currentUser, userData} = useContext(UserContext)
 
+  const wordList = ["unscramble", "gorgeous", "maroon", "development", "local"];
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isScrambled, setIsScrambled] = useState(true);
   const [userAnswer, setUserAnswer] = useState("");
   const [scrambledWord, setScrambledWord] = useState(scrambleWord(wordList[0]));
+  const[points, setPoints] = useState()
 
   const toggleScramble = () => {
     setIsScrambled((prevIsScrambled) => !prevIsScrambled);
@@ -41,11 +46,15 @@ const UnscrambleGame = () => {
     setUserAnswer(e.target.value);
   };
 
-  const checkAnswer = () => {
+  const checkAnswer = async() => {
     const currentWord = wordList[currentIndex].toLowerCase();
 
     if (userAnswer.toLowerCase() === currentWord) {
+      
       alert("Correct! You unscrambled the word.");
+      await updateDoc(doc(db, "users", currentUser?.uid), {
+        coins : (userData.coins)+ 10
+      })
       goToNextWord();
     } else {
       alert("Try again. Your answer is incorrect.");

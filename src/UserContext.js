@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { auth, db } from "./firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 
 export const UserContext = React.createContext();
 
@@ -19,14 +19,11 @@ export const UserProvider = ({ children }) => {
             console.log(currentUser?.uid);
   
             const userRef = doc(db, "users", currentUser?.uid);
-            const data = await getDoc(userRef);
+            await onSnapshot(userRef, (doc) => {
+              setUserData(doc?.data())
+            });
   
-            if (data.exists) {
-              console.log(data?.data());
-              setUserData(data?.data());
-            } else {
-              console.log("no doc");
-            }
+            
           }
         } catch (error) {
           console.error(error);
