@@ -148,6 +148,7 @@ const MainHome = () => {
           </Col>
         </Row>
       </Container>
+      
     </div>
   );
 };

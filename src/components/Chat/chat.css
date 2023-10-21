@@ -36,6 +36,14 @@ my-flex-props{
     border: none;
 }
 
+.btn-wait{
+    padding: 5px 70px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    background-color:grey;
+    border: none;
+}
+
 .btn-confirm:hover {
     /* Styles applied on hover */
     background-color: greenyellow;
@@ -44,7 +52,7 @@ my-flex-props{
 }
 
 .btn-back{
-    padding: 5px 10px;
+    padding: 15px 25px;
     border-radius: 30px;
     background-color: pink;
     position: relative;

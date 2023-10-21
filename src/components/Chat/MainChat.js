@@ -73,9 +73,13 @@ function SpeechInput() {
             {/* <button onClick={SpeechRecognition.stopListening}>
             Stop Speech Input
           </button> */}
-            <button onClick={handleSubmit} className="btn-confirm" style={{color: "black"}}>
+          {
+            currState === 'idle'? <button onClick={handleSubmit} className="btn-confirm" style={{color: "black"}}>
               Confirm
-            </button>
+            </button>:
+            <button className="btn-wait"> Wait....</button>
+          }
+            
 
             <MDBDropdown>
               <MDBDropdownToggle tag="a" className="btn btn-primary" onClick={()=> setCurrLang('english')}>
@@ -88,8 +92,10 @@ function SpeechInput() {
               </MDBDropdownMenu>
             </MDBDropdown>
 
+            {currState === "loading" && <p style={{fontSize: "2rem"}}>Please wait while your response is loading ...</p> }
             {currState === "idle" && <MicAnimation /> }
-            {currState === "loading" && <CatEar /> }
+
+            {currState === "loading" && <div style={{position: "relative", top:"-120px"}}><CatEar /></div>}
             {currState === "speaking" &&  <p className="resp-p"> {responseMessage}</p>}
               
   

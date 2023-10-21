@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTimer } from "use-timer";
 import axios from "axios";
 import "./pomo.css";
@@ -12,11 +12,18 @@ import { Row, Col } from "reactstrap";
 
 const MainPomodoro = () => {
   const [color, setColor] = useState("green");
+  const [customTimer, setCustomTimer] = useState(100); // Default timer duration
 
   const { time, start, pause, reset, status } = useTimer({
-    initialTime: 100,
+    initialTime: customTimer,
     timerType: "DECREMENTAL",
+    autostart: false, // Don't auto-start the timer
   });
+
+  useEffect(() => {
+    // Update the timer duration when customTimer changes
+    reset({ time: customTimer });
+  }, [customTimer]);
 
   const handleStartClick = () => {
     setColor("red"); // Set the color to red when the button is clicked
@@ -31,16 +38,22 @@ const MainPomodoro = () => {
         console.error("Error:", error);
       });
 
-      setTimeout(() => {
-        axios
-          .post("http://localhost:8000/pomodoro/0", {})
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      }, 100000); // 100000 milliseconds = 100 seconds
+    setTimeout(() => {
+      axios
+        .post("http://localhost:8000/pomodoro/0", {})
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }, customTimer * 1000); // Convert customTimer to milliseconds
+  };
+
+  const handleCustomTimerChange = (event) => {
+    const newCustomTimer = parseInt(event.target.value, 10);
+    setCustomTimer(newCustomTimer);
+    reset({ time: newCustomTimer }); // Reset the timer with the new custom time
   };
 
   return (
@@ -58,18 +71,45 @@ const MainPomodoro = () => {
           <motion.button
             whileTap={{ scale: 1.2 }}
             className="pomo-btn"
-            onClick={handleStartClick} // Call handleStartClick instead of start directly
+            onClick={handleStartClick}
           >
             START
+          </motion.button>
+
+          <motion.button
+            whileTap={{ scale: 1.2 }}
+            className="pomo-btn-stop"
+            onClick={() => {
+              axios
+                .post("http://localhost:8000/pomodoro/0", {})
+                .then((response) => {
+                  console.log(response);
+                  setTimeout(100);
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
+            }}
+          >
+            Stop
           </motion.button>
           <p style={{ fontSize: "2rem" }}>
             Time Remaining:{" "}
             <span style={{ fontSize: "3rem", fontWeight: "500" }}>
-              {time > 0 ? time : 0}{" "}
+              {customTimer >= 0 ? time : 0}{" "}
             </span>
           </p>
 
-          {/* {status === "RUNNING" && <p>Running...</p>} */}
+          <div>
+            <label htmlFor="customTimer">Custom Timer (seconds): </label>
+            <input
+              type="number"
+              id="customTimer"
+              name="customTimer"
+              value={customTimer}
+              onChange={handleCustomTimerChange}
+            />
+          </div>
         </Col>
       </Row>
     </div>
