@@ -5,8 +5,8 @@ import "./Home.css"; // Make sure to import your CSS file
 import suberBoy from "../../assets/images/superboy.png";
 import cube from "../../assets/images/cube.png";
 import bot from "../../assets/images/bot.png";
-import { db, auth } from "../../firebase";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import blue from '../../assets/images/blue.png'
+import clock from '../../assets/images/clock.png'
 
 import TodoList from "./TodoList";
 import Card from "./Card";
@@ -15,20 +15,20 @@ import { onAuthStateChanged } from "firebase/auth";
 import { UserContext } from "../../UserContext";
 
 const MainHome = () => {
-  const days = [
-    { id: 1, day: "S" },
-    { id: 2, day: "M" },
-    { id: 3, day: "T" },
-    { id: 4, day: "W" },
-    { id: 5, day: "T" },
-    { id: 6, day: "F" },
-    { id: 7, day: "S" },
-  ];
 
-  const progressData = [
-    { id: 1, h3: "Linear equation using 2 variables", val: 0.2 },
-    { id: 2, h3: "Forces & Newtons Laws of Motion", val: 0.7 },
-    { id: 3, h3: "Matter - Solids, Liquids & Gases", val: 0.4 },
+  const leaderBoard = [{id: 1, name: 'Harry', coins: 980},
+  {id: 2, name: 'Ankit', coins: 755},
+  {id: 3, name: 'Aditi', coins: 125},
+];
+
+  const days = [
+    { id: 1, day: "M" },
+    { id: 2, day: "T" },
+    { id: 3, day: "W" },
+    { id: 4, day: "T" },
+    { id: 5, day: "F" },
+    { id: 6, day: "S" },
+    { id: 7, day: "S" },
   ];
 
   const currentDate = new Date();
@@ -66,7 +66,11 @@ const MainHome = () => {
 
   return (
     <div className="bg-home">
-      <div className="dummy-dash"></div>
+      <div className="dummy-dash">
+      <div style={{display: "flex", flexDirection: "row-reverse"}}>
+      <Link to='/pomodoro'> <img className="img-clock" style={{margin: "45px 120px 0 0"}} src={clock} alt=".." /> </Link>
+      </div>
+      </div>
 
       <Container className="dash">
         <Row>
@@ -108,42 +112,22 @@ const MainHome = () => {
             lg="6"
             style={{ backgroundColor: "#003566" }}
           >
-            <div className="progress-card">
-              <Row>
-                <Col className="my-flex-props" lg="4">
-                  <img className="app-icon" src={bot} alt="" />
-                </Col>
-                <Col lg="8">
-                  <h4> Interactive Chatbot</h4>
-                  <p>Talk to our virutal chatbot to solve your queries</p>
-                  <Button color="primary" outline>
-                    <Link to="/chatme"> Visit App</Link>
-                  </Button>
-                </Col>
-              </Row>
-
-              <Row className="mt-5">
-                <Col className="my-flex-props" lg="4">
-                  <img className="app-icon" src={cube} alt="" />
-                </Col>
-                <Col lg="8">
-                  <h4> Interactive Chatbot</h4>
-                  <p>Talk to our virutal chatbot to solve your queries</p>
-                  <Button color="primary" outline>
-                    <Link to="https://aditipy.github.io/Simon.github.io/">
-                      {" "}
-                      Visit App
-                    </Link>
-                  </Button>
-                </Col>
-              </Row>
+          {leaderBoard.map((leader)=>{
+            return <div className="leaderBoard" key={leader.id}>
+                  <p>{leader.id}</p>
+                  <h5>{leader.name}</h5>
+                  <p>{leader.coins}</p>
             </div>
+      
+          })}
+
+
           </Col>
 
           <Col
             className="my-flex-props round-right"
             lg="6"
-            style={{ backgroundColor: "#001d3d" }}
+            style={{ backgroundColor: "#001d3d"}}
           >
             <TodoList />
           </Col>
