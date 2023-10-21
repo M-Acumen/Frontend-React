@@ -183,3 +183,11 @@ background-image: url("https://www.transparenttextures.com/patterns/inspiration-
     margin-top: 5px;
     color: #222;
 }
+
+
+.leaderBoard{
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

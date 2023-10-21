@@ -40,7 +40,7 @@ const OurApps = () => {
       title: "Essay Writing",
       desc: "Given a few mandatory words evaluate the essay and give feedback for it.",
       linkTo: "/grammar",
-      imgUrl: "/images/bot.png",
+      imgUrl: "/images/exam.png",
       bg: "#ED7D31"
     },
     {
@@ -48,15 +48,15 @@ const OurApps = () => {
         title: 'Scrambled Words',
         desc: 'Arrange a set of jumbled letters to form a proper word.',
         linkTo: '/scramble',
-        imgUrl: '/images/blue.png',
-        bg: "#190482",
+        imgUrl: '/images/quiz.png',
+        bg: "#3287D4",
     }, 
     {
       id: 3,
       title: 'Quiz',
       desc: '(In Progress)',
       linkTo: '#',
-      imgUrl: '/images/clock.png',
+      imgUrl: '/images/multiple.png',
       bg: "#C70039"
     }
   ];

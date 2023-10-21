@@ -19,6 +19,7 @@ const Login = () => {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     if (currentUser) {
         navigate("/home")
