@@ -23,7 +23,7 @@ const Login = () => {
     if (currentUser) {
         navigate("/home")
     }
-  }, [user, navigate])
+  }, [user, navigate, currentUser])
 
   return (
     <div

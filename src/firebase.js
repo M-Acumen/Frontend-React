@@ -70,15 +70,15 @@ const logInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (name, email, password, username) => {
+const registerWithEmailAndPassword = async (name, email, password,) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
     await setDoc(doc(db,"users", user.uid), {
       uid: user.uid,
       name,
-      authProvider: "local",
       email,
+      level: 0,
       coins : 0,
       streak : 0, 
       username : name,

@@ -1,6 +1,6 @@
 import { React, useContext, useEffect, useState } from "react";
 import { Row, Col, Container, Button } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./Home.css"; // Make sure to import your CSS file
 import suberBoy from "../../assets/images/superboy.png";
 
@@ -12,7 +12,7 @@ import Card from "./Card";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { onAuthStateChanged } from "firebase/auth";
 import { UserContext } from "../../UserContext";
-import { auth, db } from "../../firebase";
+import { auth, db, logout } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 const MainHome = () => {
@@ -39,6 +39,7 @@ const MainHome = () => {
   // const [userData, setUserData] = useState();
   const [user, loading, error] = useAuthState(auth);
   const {currentUser, userData} = useContext(UserContext);
+  const navigate = useNavigate()
   
   // useEffect(() => {
   //   // auth.onAuthStateChanged((user) => {
@@ -116,7 +117,11 @@ const MainHome = () => {
           <Col lg="4" className="dash-item">
             <div className="dash-info right-dash-item">
               <h4>{userData?.name}</h4>
-              <p>{userData?.username}</p>
+              <button onClick={() => {logout()
+              if(!currentUser){
+                navigate("/login")
+              }
+              }}>Log Out</button>
               {days.map((day) => (
                 <span
                   style={{
