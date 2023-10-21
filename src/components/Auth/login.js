@@ -11,6 +11,7 @@ import {
 } from "../../firebase";
 import "./auth.css";
 import { UserContext } from "../../UserContext";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Login = () => {
   const { currentUser, userData } = useContext(UserContext);
@@ -20,12 +21,14 @@ const Login = () => {
   const navigate = useNavigate();
 
 
-  useEffect(() => {
-    if (currentUser) {
-        navigate("/home")
-    }
-  }, [user, navigate, currentUser])
+  // useEffect(() => {
+  // //   if (currentUser) {
+  // //       navigate("/home")
+  // //   }
+  // // }, [user, navigate, currentUser]
+  // )
 
+  
   return (
     <div
       style={{
@@ -86,6 +89,7 @@ const Login = () => {
                   className="btn btn-primary mb-3 w-100"
                   onClick={() => {
                     logInWithEmailAndPassword(email, password);
+                    console.log(currentUser.uid)
                     if (currentUser) {
                       navigate("/home");
                     } else {

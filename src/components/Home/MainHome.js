@@ -3,9 +3,9 @@ import { Row, Col, Container, Button } from "reactstrap";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./Home.css"; // Make sure to import your CSS file
 import suberBoy from "../../assets/images/superboy.png";
-import Trophy from './trophy.png'
+import Trophy from "./trophy.png";
 
-import clock from '../../assets/images/clock.png'
+import clock from "../../assets/images/clock.png";
 import OurApps from "./OurApps";
 
 import TodoList from "./TodoList";
@@ -17,9 +17,7 @@ import { auth, db, logout } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 const MainHome = () => {
-
- 
-const [leaderBoard, setLeaderBoard] = useState([]);
+  const [leaderBoard, setLeaderBoard] = useState([]);
 
   const days = [
     { id: 1, day: "M" },
@@ -36,34 +34,8 @@ const [leaderBoard, setLeaderBoard] = useState([]);
   // const [currentUser, setCurrentUser] = useState();
   // const [userData, setUserData] = useState();
   const [user, loading, error] = useAuthState(auth);
-  const {currentUser, userData} = useContext(UserContext);
-  const navigate = useNavigate()
-  
-  // useEffect(() => {
-  //   // auth.onAuthStateChanged((user) => {
-  //   //   setCurrentUser(user)
-  //   // })
-  //   const fetchUserData = async () => {
-  //     try {
-  //       if (currentUser) {
-  //         console.log(currentUser?.uid);
-
-  //         const userRef = doc(db, "users", currentUser?.uid);
-  //         const data = await getDoc(userRef);
-
-  //         if (data.exists) {
-  //           console.log(data?.data());
-  //           setUserData(data?.data());
-  //         } else {
-  //           console.log("no doc");
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   fetchUserData();
-  // }, [currentUser]);
+  const { currentUser, userData } = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAllUsers = async () => {
@@ -84,14 +56,22 @@ const [leaderBoard, setLeaderBoard] = useState([]);
     };
 
     fetchAllUsers();
-  }, []); 
+  }, []);
 
   return (
     <div className="bg-home">
       <div className="dummy-dash">
-      <div style={{display: "flex", flexDirection: "row-reverse"}}>
-      <Link to='/pomodoro'> <img className="img-clock" style={{margin: "45px 120px 0 0"}} src={clock} alt=".." /> </Link>
-      </div>
+        <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+          <Link to="/pomodoro">
+            {" "}
+            <img
+              className="img-clock"
+              style={{ margin: "45px 120px 0 0" }}
+              src={clock}
+              alt=".."
+            />{" "}
+          </Link>
+        </div>
       </div>
 
       <Container className="dash">
@@ -108,11 +88,14 @@ const [leaderBoard, setLeaderBoard] = useState([]);
           <Col lg="4" className="dash-item">
             <div className="dash-info right-dash-item">
               <h4>{userData?.name}</h4>
-              <button onClick={() => {logout()
-              if(!currentUser){
-                navigate("/login")
-              }
-              }}>Log Out</button>
+              <button
+                onClick={() => {
+                  
+                  navigate("/login")
+                }}
+              >
+                Log Out
+              </button>
               {days.map((day) => (
                 <span
                   style={{
@@ -140,26 +123,26 @@ const [leaderBoard, setLeaderBoard] = useState([]);
             lg="6"
             style={{ backgroundColor: "#003566" }}
           >
-         
-          <h3 style={{color: "white", padding: "20px 0"}}>Leaderboard Section</h3>
-          <img src={Trophy} alt=".." />
+            <h3 style={{ color: "white", padding: "20px 0" }}>
+              Leaderboard Section
+            </h3>
+            <img src={Trophy} alt=".." />
 
-          {leaderBoard.map((leader, index)=>{
-            return <div className="leaderBoard" key={leader.id}>
-                  <p>{index+1}</p>
+            {leaderBoard.map((leader, index) => {
+              return (
+                <div className="leaderBoard" key={leader.id}>
+                  <p>{index + 1}</p>
                   <h5>{leader.name}</h5>
                   <p>{leader.coins}</p>
-            </div>
-      
-          })}
-
-
+                </div>
+              );
+            })}
           </Col>
 
           <Col
             className="my-flex-props round-right"
             lg="6"
-            style={{ backgroundColor: "#001d3d"}}
+            style={{ backgroundColor: "#001d3d" }}
           >
             <TodoList />
           </Col>
@@ -169,4 +152,4 @@ const [leaderBoard, setLeaderBoard] = useState([]);
   );
 };
 
-export default MainHome
+export default MainHome;
