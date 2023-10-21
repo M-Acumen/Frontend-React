@@ -160,6 +160,7 @@ const [leaderBoard, setLeaderBoard] = useState([]);
           </Col>
         </Row>
       </Container>
+      
     </div>
   );
 };

@@ -67,11 +67,13 @@ const UnscrambleGame = () => {
   return (
     <div className="unscramble-container" style={{ paddingTop: "200px"}}>
     <div >
-      <h2 className="title-scramble" style={{color: "#404040"}}>Unscramble The Word</h2>
+
+      <h2 className="title-scramble" style={{color: "#404040", letterSpacing: "5px"}}>UNSCRAMBLE THE WORD</h2>
+
       <Animation
         pose={isScrambled ? "scramble" : "unscramble"}
         className="word-animation"
-        style={{ fontFamily: "cursive", fontSize: "2.2rem" }}
+        style={{ fontFamily: "monospace", fontSize: "2.5rem",fontWeight: "500", letterSpacing: "20px" }}
       >
         {isScrambled ? scrambledWord : wordList[currentIndex]}
       </Animation>

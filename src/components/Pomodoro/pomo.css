@@ -22,4 +22,14 @@
 
     background-color: #A7D397;
 }
+
+
+.pomo-btn-stop{
+    padding: 10px 50px;
+    font-size: 2rem;
+    border: none;
+    border-radius: 10px;
+
+    background-color: red;
+}
    
