@@ -38,7 +38,10 @@ const db = getFirestore(app)
 
 const googleProvider = new GoogleAuthProvider();
 
+
+
 const signInWithGoogle = async () => {
+  
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
@@ -62,7 +65,8 @@ const logInWithEmailAndPassword = async (email, password) => {
  
   try {
 
-    await signInWithEmailAndPassword(auth, email, password);
+    const user = await signInWithEmailAndPassword(auth, email, password).then(console.log("Signed In"));
+    console.log(user.uid)
 
   } catch (err) {
     console.error(err);
@@ -70,15 +74,15 @@ const logInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (name, email, password, username) => {
+const registerWithEmailAndPassword = async (name, email, password,) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
     await setDoc(doc(db,"users", user.uid), {
       uid: user.uid,
       name,
-      authProvider: "local",
       email,
+      level: 0,
       coins : 0,
       streak : 0, 
       username : name,
@@ -106,8 +110,9 @@ const sendPasswordReset = async (email) => {
   }
 };
 
-const logout = () => {
-  signOut(auth);
+const logout = async() => {
+  await signOut(auth);
+  console.log("signed out")
 };
 
 export {

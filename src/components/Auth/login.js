@@ -1,5 +1,5 @@
-import { React, useState,  useContext } from "react";
-import {  useNavigate } from "react-router-dom";
+import { React, useState, useEffect, useContext } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import Jump from "../UI/Jump";
@@ -11,6 +11,7 @@ import {
 } from "../../firebase";
 import "./auth.css";
 import { UserContext } from "../../UserContext";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Login = () => {
   const { currentUser, userData } = useContext(UserContext);
@@ -19,12 +20,15 @@ const Login = () => {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (currentUser) {
-  //       navigate("/home")
-  //   }
-  // }, [user, navigate])
 
+  // useEffect(() => {
+  // //   if (currentUser) {
+  // //       navigate("/home")
+  // //   }
+  // // }, [user, navigate, currentUser]
+  // )
+
+  
   return (
     <div
       style={{
@@ -85,6 +89,7 @@ const Login = () => {
                   className="btn btn-primary mb-3 w-100"
                   onClick={() => {
                     logInWithEmailAndPassword(email, password);
+                    console.log(currentUser.uid)
                     if (currentUser) {
                       navigate("/home");
                     } else {
