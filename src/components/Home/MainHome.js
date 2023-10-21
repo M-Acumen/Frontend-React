@@ -3,16 +3,9 @@ import { Row, Col, Container, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./Home.css"; // Make sure to import your CSS file
 import suberBoy from "../../assets/images/superboy.png";
-<<<<<<< HEAD
-import cube from "../../assets/images/cube.png";
-import bot from "../../assets/images/bot.png";
-import blue from "../../assets/images/blue.png";
-import clock from "../../assets/images/clock.png";
-=======
 
 import clock from '../../assets/images/clock.png'
 import OurApps from "./OurApps";
->>>>>>> d0dce8fdb2f25b8c9f643bc9f4265c7ca8e08b40
 
 import TodoList from "./TodoList";
 import Card from "./Card";
@@ -45,8 +38,8 @@ const MainHome = () => {
   // const [currentUser, setCurrentUser] = useState();
   // const [userData, setUserData] = useState();
   const [user, loading, error] = useAuthState(auth);
-  const { currentUser, userData } = useContext(UserContext);
-
+  const {currentUser, userData} = useContext(UserContext);
+  
   // useEffect(() => {
   //   // auth.onAuthStateChanged((user) => {
   //   //   setCurrentUser(user)
@@ -104,17 +97,9 @@ const MainHome = () => {
   return (
     <div className="bg-home">
       <div className="dummy-dash">
-        <div style={{ display: "flex", flexDirection: "row-reverse" }}>
-          <Link to="/pomodoro">
-            {" "}
-            <img
-              className="img-clock"
-              style={{ margin: "45px 120px 0 0" }}
-              src={clock}
-              alt=".."
-            />{" "}
-          </Link>
-        </div>
+      <div style={{display: "flex", flexDirection: "row-reverse"}}>
+      <Link to='/pomodoro'> <img className="img-clock" style={{margin: "45px 120px 0 0"}} src={clock} alt=".." /> </Link>
+      </div>
       </div>
 
       <Container className="dash">
@@ -159,34 +144,22 @@ const MainHome = () => {
             lg="6"
             style={{ backgroundColor: "#003566" }}
           >
-            {/* {leaderBoard?.map((leader) => {
-              console.log(leader)
-              return (
-                
-                <div className="leaderBoard" key={leader?.id}>
-                  <p>{leader?.id}</p>
-                  <h5>{leader?.name}</h5>
-                  <p>{leader?.points}</p>
-                </div>
-              );
-            })} */}
-            <ul>
-        {leaderBoard.map((user) => (
-          <li key={user.id}>
-            <div className="user-card">
-              <p>Name: {user.name}</p>
-              <p>Points: {user.points}</p>
-              {/* Add more user details here */}
+          {leaderBoard.map((leader)=>{
+            return <div className="leaderBoard" key={leader.id}>
+                  <p>{leader.id}</p>
+                  <h5>{leader.name}</h5>
+                  <p>{leader.coins}</p>
             </div>
-          </li>
-        ))}
-      </ul>
+      
+          })}
+
+
           </Col>
 
           <Col
             className="my-flex-props round-right"
             lg="6"
-            style={{ backgroundColor: "#001d3d" }}
+            style={{ backgroundColor: "#001d3d"}}
           >
             <TodoList />
           </Col>
@@ -196,4 +169,4 @@ const MainHome = () => {
   );
 };
 
-export default MainHome;
+export default MainHome
