@@ -3,6 +3,7 @@ import { Row, Col, Container, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./Home.css"; // Make sure to import your CSS file
 import suberBoy from "../../assets/images/superboy.png";
+import Trophy from './trophy.png'
 
 import clock from '../../assets/images/clock.png'
 import OurApps from "./OurApps";
@@ -17,11 +18,8 @@ import { collection, getDocs } from "firebase/firestore";
 
 const MainHome = () => {
 
-  const leaderBoard = [
-  //   {id: 1, name: 'Harry', coins: 980},
-  // {id: 2, name: 'Ankit', coins: 755},
-  // {id: 3, name: 'Aditi', coins: 125},
-];
+ 
+const [leaderBoard, setLeaderBoard] = useState([]);
 
   const days = [
     { id: 1, day: "M" },
@@ -70,29 +68,22 @@ const MainHome = () => {
     const fetchAllUsers = async () => {
       try {
         const query = await getDocs(collection(db, "users"));
-        query.forEach((doc) =>
-          leaderBoard.push({
-            id: leaderBoard.length + 1,
-            name: doc.data().name,
-            points: doc.data().coins,
-          })
-        );
+        const newLeaderBoard = query.docs.map((doc, index) => ({
+          id: index + 1,
+          name: doc.data().name,
+          points: doc.data().coins,
+        }));
 
-        leaderBoard.sort((a, b) => b.points - a.points);
+        newLeaderBoard.sort((a, b) => b.points - a.points);
 
-        for (let i = 0; i < leaderBoard.length; i++) {
-          leaderBoard[i].id = i+1
-          
-        }
-
-        console.log(leaderBoard);
+        setLeaderBoard(newLeaderBoard); // Update leaderBoard state
       } catch (e) {
         console.log(e);
       }
     };
 
     fetchAllUsers();
-  }, [leaderBoard]);
+  }, []); 
 
   return (
     <div className="bg-home">
@@ -144,9 +135,13 @@ const MainHome = () => {
             lg="6"
             style={{ backgroundColor: "#003566" }}
           >
-          {leaderBoard.map((leader)=>{
+         
+          <h3 style={{color: "white", padding: "20px 0"}}>Leaderboard Section</h3>
+          <img src={Trophy} alt=".." />
+
+          {leaderBoard.map((leader, index)=>{
             return <div className="leaderBoard" key={leader.id}>
-                  <p>{leader.id}</p>
+                  <p>{index+1}</p>
                   <h5>{leader.name}</h5>
                   <p>{leader.coins}</p>
             </div>

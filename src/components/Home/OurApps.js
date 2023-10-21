@@ -49,7 +49,7 @@ const OurApps = () => {
         desc: 'Arrange a set of jumbled letters to form a proper word.',
         linkTo: '/scramble',
         imgUrl: '/images/quiz.png',
-        bg: "#190482",
+        bg: "#3287D4",
     }, 
     {
       id: 3,

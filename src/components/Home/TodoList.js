@@ -91,7 +91,7 @@ export default function TodoList() {
                         id={`flexCheckChecked-${todo?.id}`}
                         className="me-3"
                         checked= {todo.completed}
-                        onChange={() => toggleTodoCompletion(todo.id, todo.completed)}
+                        // onChange={() => toggleTodoCompletion(todo.id, todo.completed)}
                       />
                       {todo?.completed ? <s>{todo?.todo}</s> : todo?.todo}
                     </MDBListGroupItem>

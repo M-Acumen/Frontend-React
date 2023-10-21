@@ -1,5 +1,5 @@
-import { React, useState, useEffect, useContext } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { React, useState,  useContext } from "react";
+import {  useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import Jump from "../UI/Jump";
@@ -19,11 +19,11 @@ const Login = () => {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (currentUser) {
-        navigate("/home")
-    }
-  }, [user, navigate])
+  // useEffect(() => {
+  //   if (currentUser) {
+  //       navigate("/home")
+  //   }
+  // }, [user, navigate])
 
   return (
     <div
