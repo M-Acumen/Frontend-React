@@ -100,7 +100,7 @@ const Login = () => {
                     logInWithEmailAndPassword(email, password)
                     
                         if (user) {
-                            navigate("/landing")
+                            navigate("/home")
                         }
                 }}
               >

@@ -1,13 +1,18 @@
-import React from "react";
+import { React, useContext, useEffect, useState } from "react";
 import { Row, Col, Container, Button } from "reactstrap";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "./Home.css"; // Make sure to import your CSS file
 import suberBoy from "../../assets/images/superboy.png";
 import cube from "../../assets/images/cube.png";
 import bot from "../../assets/images/bot.png";
+import { db, auth } from "../../firebase";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
 import TodoList from "./TodoList";
 import Card from "./Card";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { onAuthStateChanged } from "firebase/auth";
+import { UserContext } from "../../UserContext";
 
 const MainHome = () => {
   const days = [
@@ -28,6 +33,37 @@ const MainHome = () => {
 
   const currentDate = new Date();
   const currentDayOfWeek = currentDate.getDay();
+  // const [currentUser, setCurrentUser] = useState();
+  // const [userData, setUserData] = useState();
+  const [user, loading, error] = useAuthState(auth);
+  const {currentUser, userData} = useContext(UserContext);
+  
+  // useEffect(() => {
+  //   // auth.onAuthStateChanged((user) => {
+  //   //   setCurrentUser(user)
+  //   // })
+  //   const fetchUserData = async () => {
+  //     try {
+  //       if (currentUser) {
+  //         console.log(currentUser?.uid);
+
+  //         const userRef = doc(db, "users", currentUser?.uid);
+  //         const data = await getDoc(userRef);
+
+  //         if (data.exists) {
+  //           console.log(data?.data());
+  //           setUserData(data?.data());
+  //         } else {
+  //           console.log("no doc");
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+  //   fetchUserData();
+  // }, [currentUser]);
+
   return (
     <div className="bg-home">
       <div className="dummy-dash"></div>
@@ -45,8 +81,8 @@ const MainHome = () => {
 
           <Col lg="4" className="dash-item">
             <div className="dash-info right-dash-item">
-              <h4>Aditi Sharma</h4>
-              <p>Student</p>
+              <h4>{userData?.name}</h4>
+              <p>{userData?.username}</p>
               {days.map((day) => (
                 <span
                   style={{
@@ -81,7 +117,7 @@ const MainHome = () => {
                   <h4> Interactive Chatbot</h4>
                   <p>Talk to our virutal chatbot to solve your queries</p>
                   <Button color="primary" outline>
-                  <Link to='/chatme'> Visit App</Link>  
+                    <Link to="/chatme"> Visit App</Link>
                   </Button>
                 </Col>
               </Row>
@@ -94,7 +130,10 @@ const MainHome = () => {
                   <h4> Interactive Chatbot</h4>
                   <p>Talk to our virutal chatbot to solve your queries</p>
                   <Button color="primary" outline>
-                  <Link to='https://aditipy.github.io/Simon.github.io/'> Visit App</Link>  
+                    <Link to="https://aditipy.github.io/Simon.github.io/">
+                      {" "}
+                      Visit App
+                    </Link>
                   </Button>
                 </Col>
               </Row>
