@@ -3,10 +3,9 @@ import { Row, Col, Container, Button } from "reactstrap";
 import {Link} from 'react-router-dom';
 import "./Home.css"; // Make sure to import your CSS file
 import suberBoy from "../../assets/images/superboy.png";
-import cube from "../../assets/images/cube.png";
-import bot from "../../assets/images/bot.png";
-import blue from '../../assets/images/blue.png'
+
 import clock from '../../assets/images/clock.png'
+import OurApps from "./OurApps";
 
 import TodoList from "./TodoList";
 import Card from "./Card";
@@ -70,6 +69,8 @@ const MainHome = () => {
           </Col>
         </Row>
       </Container>
+
+      <OurApps />
 
       <Container>
         <Row className="" style={{ marginTop: "50px" }}>

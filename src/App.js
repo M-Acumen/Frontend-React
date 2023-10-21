@@ -25,8 +25,8 @@ function App() {
         <Route path="/chatme" element={<Chat />} />
         <Route path="/grammar" element={<Grammar />} />
         <Route path="/pomodoro" element={<PomoDoro />} />
-        <Route path="/quiz" element={<Quiz />} />
         <Route path="/scramble" element={<Scramble />} />
+        <Route path="/quiz" element={<Quiz />} />
 
 
 
