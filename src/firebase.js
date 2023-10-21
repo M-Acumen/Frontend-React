@@ -16,6 +16,8 @@ import {
   collection,
   where,
   addDoc,
+  doc,
+  setDoc,
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
@@ -32,7 +34,7 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
-const db = getFirestore(app);
+const db = getFirestore(app)
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -72,14 +74,15 @@ const registerWithEmailAndPassword = async (name, email, password, username) => 
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(collection(db, "users"), {
+    await setDoc(doc(db,"users", user.uid), {
       uid: user.uid,
       name,
       authProvider: "local",
       email,
       coins : 0,
-      streak : 0,
-      username
+      streak : 0, 
+      username : name,
+      todo : {}
     });
   } catch (err) {
     console.error(err);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   MDBBadge,
   MDBCard,
@@ -11,32 +11,44 @@ import {
   MDBListGroupItem,
   MDBRow,
 } from "mdb-react-ui-kit";
+import { db } from "../../firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import { UserContext } from "../../UserContext";
 
 export default function TodoList() {
-  const [todoItems, setTodoItems] = useState([
-    { id: 1, todo: "Team meeting", completed: false },
-    { id: 2, todo: "Task list and assignments", completed: false },
-    { id: 3, todo: "Get Groceries", completed: false },
-    { id: 4, todo: "Study 5th chapter of Physics", completed: false },
-    { id: 5, todo: "Submit the project for Chemistry", completed: false },
-  ]);
+  const {currentUser, userData} = useContext(UserContext)
+  const [todoItems, setTodoItems] = useState();
 
   const [newTodo, setNewTodo] = useState("");
 
-  const addTodo = () => {
+  useEffect(() => {
+    setTodoItems(
+      userData?.todo
+    )
+    
+  }, [userData?.todo])
+
+  
+
+  const addTodo = async() => {
     if (newTodo.trim() !== "") {
       const newId = todoItems.length + 1;
       const newItem = { id: newId, todo: newTodo, completed: false };
       setTodoItems([...todoItems, newItem]);
       setNewTodo("");
     }
+    await updateDoc(doc(db, "users", currentUser.uid), {
+      todo : todoItems
+    })
   };
 
-  const toggleTodoCompletion = (id) => {
-    const updatedTodos = todoItems.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
-    setTodoItems(updatedTodos);
+  const toggleTodoCompletion = async(id, completed) => {
+    todoItems[id].completed = !completed
+
+    await updateDoc(doc(db, "users", currentUser.uid), {
+      todo : todoItems
+    })
+    
   };
 
   return (
@@ -68,20 +80,20 @@ export default function TodoList() {
                 </MDBInputGroup>
 
                 <MDBListGroup className="rounded-0">
-                  {todoItems.map((todo) => (
+                  {todoItems?.map((todo) => (
                     <MDBListGroupItem
                       className="border-0 d-flex align-items-center ps-0"
-                      key={todo.id}
+                      key={todo?.id}
                     >
                       <MDBCheckbox
                         name="flexCheck"
                         value=""
-                        id={`flexCheckChecked-${todo.id}`}
+                        id={`flexCheckChecked-${todo?.id}`}
                         className="me-3"
-                        checked={todo.completed}
-                        onChange={() => toggleTodoCompletion(todo.id)}
+                        checked= {todo.completed}
+                        onChange={() => toggleTodoCompletion(todo.id, todo.completed)}
                       />
-                      {todo.completed ? <s>{todo.todo}</s> : todo.todo}
+                      {todo?.completed ? <s>{todo?.todo}</s> : todo?.todo}
                     </MDBListGroupItem>
                   ))}
                 </MDBListGroup>
