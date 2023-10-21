@@ -1,6 +1,10 @@
 .question-div{
+    font-size: 2rem;
     text-align: center;
-    /* position: absolute; */
-    /* top: 47%; */
-    /* left: 38%; */
 }
+.flex{
+    display: flex;
+}
+.options-div{
+    display: flex;
+}   
